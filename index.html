@@ -19,6 +19,19 @@
             min-height: 100vh; overflow-x: hidden;
         }
 
+        /* --- BAR PENGUMUMAN LIVE --- */
+        .announcement-bar {
+            width: 100%;
+            background: #1a1a1a;
+            border-bottom: 1px solid #FFD700;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 10000;
+            height: 35px;
+            display: flex;
+            align-items: center;
+        }
+
         /* --- OVERLAYS --- */
         #login-overlay, #loading-screen, #profile-modal, #intro-disclaimer, #crop-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -48,16 +61,12 @@
         }
         .crop-buttons { width: 100%; display: flex; justify-content: space-around; align-items: center; }
         .btn-crop-action { background: none; border: none; color: white; font-size: 0.9rem; font-weight: bold; cursor: pointer; }
-        .btn-crop-confirm { color: #4CAF50; } /* Warna hijau untuk 'Selesai' */
-        .btn-crop-cancel { color: #ff4d4d; } /* Warna merah untuk 'Batal' */
+        .btn-crop-confirm { color: #4CAF50; } 
+        .btn-crop-cancel { color: #ff4d4d; } 
         .crop-info { color: #555; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 10px; }
 
-        /* Mengatur agar Cropper.js terlihat bersih */
-        .cropper-view-box, .cropper-face { border-radius: 0; }
-        .cropper-line, .cropper-point { background-color: #fff; }
-
         /* --- MAIN UI --- */
-        .container { max-width: 450px; padding: 60px 20px; margin-left: 20px; }
+        .container { max-width: 450px; padding: 80px 20px 60px 20px; margin-left: 20px; }
         .profile-trigger { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
         #pfp-small { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid #fff; }
         header { border-left: 3px solid #ffffff; padding-left: 15px; margin-bottom: 15px; }
@@ -87,6 +96,12 @@
     </style>
 </head>
 <body>
+
+    <div class="announcement-bar">
+        <marquee id="live-info" style="color: #FFD700; font-size: 0.8rem; font-weight: bold;">
+            JANGAN SEBARKAN WEB DILUAR MARGA, KARENA WEB INI KHUSUS ANGGOTA NEXUS FAMS........          UPDATE TERBARU FONT MARGA UDAH HADIR. CEK SEKARANG........          INTRO MARGA NYUSUL YAHHH!!!!
+        </marquee>
+    </div>
 
     <div id="login-overlay">
         <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); width: 300px; text-align: center;">
@@ -173,7 +188,7 @@
 
             <div class="section">
                 <h2 style="font-size: 1.1rem; margin:0;">Font Marga</h2>
-                <a href="LINK_DOWNLOAD_FONT" target="_blank" class="btn" onclick="addHistory('Download Font')">Download</a>
+                <a href="https://drive.google.com/file/d/15H4OU7ekGCFf7_3x-OESgEgzXhKwSj6g/view?usp=drivesdk" target="_blank" class="btn" onclick="addHistory('Download Font')">Download</a>
             </div>
 
             <div class="section">
@@ -211,7 +226,30 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
     <script>
+        // --- FIREBASE CONFIG (ISI DISINI BG) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSy...",
+            authDomain: "proyek-abang.firebaseapp.com",
+            databaseURL: "https://proyek-abang-default-rtdb.firebaseio.com",
+            projectId: "proyek-abang",
+            storageBucket: "proyek-abang.appspot.com",
+            messagingSenderId: "...",
+            appId: "..."
+        };
+
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.database();
+
+        // Mengambil pengumuman live
+        db.ref("nexus/announcement").on("value", (snapshot) => {
+            const data = snapshot.val();
+            document.getElementById("live-info").innerText = data ? data.text : "WELCOME TO NEXUS CREATOR COMMUNITY!";
+        });
+
         let historyData = JSON.parse(localStorage.getItem("nexus_history")) || [];
         let cropper;
         let finalPfpData = "https://via.placeholder.com/100";
@@ -229,7 +267,7 @@
             if (localStorage.getItem("nexus_nama")) { showMainContent(); }
         };
 
-        // --- FUNGSI PANGKAS GAMBAR ---
+        // --- CROPPER LOGIC ---
         function handleFileSelect(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -237,43 +275,26 @@
                     const image = document.getElementById('image-to-crop');
                     image.src = e.target.result;
                     document.getElementById('crop-overlay').style.display = 'flex';
-                    
                     if (cropper) { cropper.destroy(); }
-                    
-                    // Inisialisasi Cropper dengan pengaturan yang mudah digerakkan
                     cropper = new Cropper(image, {
-                        aspectRatio: 1,
-                        viewMode: 1,
-                        dragMode: 'move', // Supaya bisa digeser fotonya
-                        autoCropArea: 0.8,
-                        restore: false,
-                        guides: true,
-                        center: true,
-                        highlight: false,
-                        cropBoxMovable: true,
-                        cropBoxResizable: true,
-                        toggleDragModeOnDblclick: false,
+                        aspectRatio: 1, viewMode: 1, dragMode: 'move', autoCropArea: 0.8
                     });
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         function rotateCrop() { cropper.rotate(90); }
-
         function applyCrop() {
-            const canvas = cropper.getCroppedCanvas({ width: 400, height: 400 });
-            finalPfpData = canvas.toDataURL();
+            finalPfpData = cropper.getCroppedCanvas({ width: 400, height: 400 }).toDataURL();
             document.getElementById('pfp-label').innerText = 'FOTO TERPILIH ✓';
             document.getElementById('crop-overlay').style.display = 'none';
         }
-
         function cancelCrop() {
             document.getElementById('crop-overlay').style.display = 'none';
             document.getElementById('input-pfp').value = "";
         }
 
-        // --- LOGIN & MAIN LOGIC ---
+        // --- LOGIN & DISPLAY LOGIC ---
         function checkLogin() {
             const nama = document.getElementById('input-nama').value;
             const kode = document.getElementById('input-kode').value;
@@ -288,14 +309,14 @@
             document.getElementById('login-overlay').style.display = "none";
             document.getElementById('loading-screen').style.display = "flex";
 
-            setTimeout(() => { finishLogin(nama, rank, finalPfpData, color, quote); }, 10000);
-        }
-
-        function finishLogin(n, r, p, c, q) {
-            localStorage.setItem("nexus_nama", n); localStorage.setItem("nexus_rank", r);
-            localStorage.setItem("nexus_pfp", p); localStorage.setItem("nexus_color", c);
-            localStorage.setItem("nexus_quote", q);
-            location.reload();
+            setTimeout(() => { 
+                localStorage.setItem("nexus_nama", nama);
+                localStorage.setItem("nexus_rank", rank);
+                localStorage.setItem("nexus_pfp", finalPfpData);
+                localStorage.setItem("nexus_color", color);
+                localStorage.setItem("nexus_quote", quote);
+                location.reload(); 
+            }, 5000); // Saya percepat loadingnya biar ga kelamaan nunggu
         }
 
         function showMainContent() {
@@ -335,7 +356,7 @@
             if (list) list.innerHTML = historyData.length ? historyData.map(i => `<div>• ${i}</div>`).join("") : "Belum ada aktivitas.";
         }
 
-        function logout() { localStorage.clear(); location.reload(); }
+                function logout() { localStorage.clear(); location.reload(); }
     </script>
 </body>
-    </html>
+</html>
