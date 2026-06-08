@@ -47,10 +47,7 @@
             justify-content: space-between; align-items: center;
             padding: 60px 30px; text-align: center;
             background-color: #000;
-            
-            /* === MASUKKAN NAMA FOTO POSTER YANG ADA LOGONYA DI SINI === */
             background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('loading.jpg');
-            
             background-size: cover; 
             background-position: center;
         }
@@ -68,13 +65,8 @@
             background-size: 100% 100%, 15px 15px;
         }
         
-        .loading-logo-area { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-        .loading-version { font-size: 0.9rem; font-weight: 700; color: #00e5ff; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-
-        .loading-bottom-area { width: 100%; max-width: 380px; margin-bottom: 20px; }
         .loading-title { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 15px; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
         
-        /* PROGRESS BAR STYLE */
         .progress-container {
             width: 100%; height: 14px; background: rgba(255,255,255,0.1);
             border-radius: 10px; overflow: hidden; position: relative;
@@ -140,7 +132,6 @@
             margin-bottom: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500;
             transition: all 0.3s ease;
         }
-        .file-label:hover { background: rgba(255, 215, 0, 0.1); }
 
         .btn-premium {
             width: 100%; padding: 14px; background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); 
@@ -150,22 +141,17 @@
         }
         .btn-premium:active { transform: scale(0.98); }
 
-        /* --- STYLE KHUSUS PEMANGKAS (CROPPER VERTIKAL) --- */
-        #crop-overlay {
-            background: rgba(6, 6, 8, 0.98); display: none; 
-            flex-direction: column; justify-content: space-between; align-items: center; 
-            z-index: 99999; padding: 20px 10px;
-        }
+        /* --- STYLE KHUSUS PEMANGKAS (CROPPER) --- */
+        #crop-overlay { background: rgba(6, 6, 8, 0.98); display: none; flex-direction: column; justify-content: space-between; align-items: center; z-index: 99999; padding: 20px 10px; }
         .crop-wrapper { width: 100%; height: 65vh; display: flex; align-items: center; justify-content: center; margin-top: 20px; }
         .crop-controls { width: 100%; height: auto; display: flex; flex-direction: column; align-items: center; padding: 20px 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
         .crop-buttons { width: 100%; max-width: 320px; display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-        .btn-crop-action { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border-radius: 8px; font-family: 'Poppins', sans-serif; }
+        .btn-crop-action { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 10px 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; border-radius: 8px; }
         .btn-crop-confirm { color: #4CAF50; border-color: rgba(76, 175, 80, 0.3); background: rgba(76, 175, 80, 0.1); } 
         .btn-crop-cancel { color: #ff4d4d; border-color: rgba(255, 77, 77, 0.3); background: rgba(255, 77, 77, 0.1); } 
-        .crop-info { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; font-weight: 500; }
 
         /* --- MAIN UI CONTAINER --- */
-        .container { width: 100%; padding: 80px 20px 40px 20px; }
+        .container { width: 100%; padding: 80px 20px 90px 20px; }
         .profile-trigger { 
             display: flex; align-items: center; gap: 14px; margin-bottom: 30px; cursor: pointer; 
             background: var(--bg-card); border: 1px solid var(--border-glass); padding: 12px 18px; 
@@ -183,6 +169,35 @@
         .section h2 { font-size: 1rem; font-weight: 600; margin: 0; color: #fff; }
         .btn-action { display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.06); color: #ffffff; border: 1px solid var(--border-glass); font-size: 0.75rem; font-weight: 500; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; }
         .btn-action:hover { background: #ffffff; color: #000; box-shadow: 0 4px 12px rgba(255,255,255,0.15); }
+
+        /* STATS COUNTER */
+        .stats-box { background: linear-gradient(90deg, rgba(255,215,0,0.1), transparent); padding: 12px 20px; border-radius: 12px; border-left: 3px solid var(--gold); margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; color: #fff; }
+
+        /* SYSTEM PAGES (TAB HANDLING) */
+        .app-page { display: none; }
+        .app-page.active { display: block; }
+
+        /* BOTTOM NAVBAR NAVIGATION */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 450px; height: 65px; background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-glass); display: flex; justify-content: space-around;
+            align-items: center; z-index: 999; padding: 0 10px;
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 0.7rem; font-weight: 500; cursor: pointer; transition: all 0.3s; width: 33%; }
+        .nav-item span.icon { font-size: 1.3rem; margin-bottom: 2px; transition: transform 0.2s; }
+        .nav-item.active { color: var(--gold); font-weight: 700; }
+        .nav-item.active span.icon { transform: translateY(-4px); text-shadow: 0 0 10px var(--gold-glow); }
+
+        /* LIST ANGGOTA */
+        .member-list-container { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+        .member-item { display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); padding: 12px 16px; border-radius: 14px; }
+        .member-info { display: flex; align-items: center; gap: 12px; }
+        .member-pfp { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: #222; border: 1px solid rgba(255,255,255,0.1); }
+        .member-name { font-size: 0.85rem; font-weight: 600; color: #fff; display: block; }
+        .btn-kick { background: rgba(255, 77, 77, 0.15); border: 1px solid rgba(255, 77, 77, 0.4); color: #ff4d4d; font-size: 0.7rem; font-weight: 600; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+        .btn-kick:hover { background: #ff4d4d; color: #fff; }
 
         .profile-card { background: linear-gradient(180deg, rgba(28,28,35,0.95) 0%, rgba(18,18,22,0.98) 100%); border: 1px solid rgba(255,215,0,0.2); }
         #modal-pfp { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 20px var(--gold-glow); }
@@ -241,19 +256,19 @@
         </marquee>
     </div>
 
-    <!-- TAMPILAN LOGIN -->
+    <!-- TAMPILAN LOGIN & DAFTAR -->
     <div id="login-overlay">
         <div class="glass-box" style="border: 1px solid rgba(255,255,255,0.1);">
-            <h2 style="letter-spacing: 2px; margin-top:0; font-size: 1.5rem; font-weight: 700;">NEXUS LOGIN</h2>
+            <h2 style="letter-spacing: 2px; margin-top:0; font-size: 1.5rem; font-weight: 700;">NEXUS SYSTEM</h2>
             <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 25px;">Masukkan Kredensial Anggota Marga</p>
             
             <input type="text" id="input-nama" class="glass-input" placeholder="Nama Anggota">
             <input type="password" id="input-kode" class="glass-input" placeholder="Kode Pangkat">
             
-            <label class="file-label" for="input-pfp" id="pfp-label">✨ PILIH FOTO PROFIL</label>
+            <label class="file-label" for="input-pfp" id="pfp-label">✨ UPLOAD FOTO PROFIL (WAJIB DAFTAR)</label>
             <input type="file" id="input-pfp" accept="image/*" style="display:none" onchange="handleFileSelect(this)">
             
-            <button onclick="checkLogin()" class="btn-premium">MASUK SYSTEM</button>
+            <button onclick="checkLogin()" class="btn-premium">MASUK / DAFTAR SYSTEM</button>
         </div>
     </div>
 
@@ -296,9 +311,10 @@
         </div>
     </div>
 
-    <!-- MENU UTAMA -->
+    <!-- MAIN UI CONTAINER -->
     <div id="main-content">
         <div class="container">
+            <!-- Global User Profile Bar -->
             <div class="profile-trigger" onclick="openProfile()">
                 <img id="pfp-small" src="" alt="PFP">
                 <div style="display: flex; flex-direction: column;">
@@ -307,51 +323,32 @@
                 </div>
             </div>
 
-            <header style="margin-bottom: 20px;">
-                <h1>NEXUS FAMS</h1>
-            </header>
-
-            <div class="welcome-msg">
-                Halo! Selamat datang di website resmi marga <strong>NEXUS CREATOR COMMUNITY</strong>. 
-                Disini adalah tempat kebutuhan atau peralatan marga Nexus, selamat menikmati fitur marga yahh!!!
-            </div>
-
-            <div class="section">
-                <h2>Akun Official</h2>
-                <a href="https://www.tiktok.com/@nexus.fams?_r=1&_t=ZS-957WhKlzLlJ" target="_blank" class="btn-action" onclick="addHistory('Membuka TikTok Nexus')">Buka TikTok</a>
-            </div>
-
-            <div class="section">
-                <h2>Intro Marga</h2>
-                <button class="btn-action" onclick="openIntro()">Ambil Preset</button>
-            </div>
-
-            <div class="section">
-                <h2>Font Marga</h2>
-                <a href="https://drive.google.com/file/d/15H4OU7ekGCFf7_3x-OESgEgzXhKwSj6g/view?usp=drivesdk" target="_blank" class="btn-action" onclick="addHistory('Download Font')">Download</a>
-            </div>
-
-            <div class="section">
-                <h2>CC Marga</h2>
-                <a href="LINK_ALIGHT_MOTION_CC" target="_blank" class="btn-action" onclick="addHistory('Ambil CC')">Ambil CC</a>
-            </div>
-
-            <div class="section">
-                <h2>WM Marga</h2>
-                <a href="https://alightcreative.com/am/share/u/enaKvG2WCMh1gH3i3MQEDc0sKKd2/p/WKrQlSgPJF-62da42c0b9010256" target="_blank" class="btn-action" onclick="addHistory('Download WM')">Ambil WM</a>
-            </div>
-
-            <div class="comment-section">
-                <h3 style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 1px; font-weight:600;">DISKUSI MARGA</h3>
-                <div class="comment-box">
-                    <span class="user-tag">PitNewbie' <span class="rank-tag owner-rank">OWNER 👑</span></span>
-                    <span class="comment-text">baguss ga web nya? siapa dlu yang buat, gw sering dibully sama member tpi masi sayang ma kalian 😑🗿</span>
-                    <div class="like-bar">❤️ <span id="like-count">142</span> Menyukai</div>
-                    
-                    <div class="reply">
-                        <span class="user-tag">akari <span class="rank-tag admin-rank">#ADMIN</span></span>
-                        <span class="comment-text">tuhhh dengerin kata owner kasian dia, iya ga biawak?🗿</span>
-                    </div>
+            <!-- HALAMAN 1: UTAMA (BERANDA) -->
+            <div id="page-utama" class="app-page active">
+                <header style="margin-bottom: 20px;">
+                    <h1>NEXUS FAMS</h1>
+                </header>
+                <div class="stats-box">
+                    📊 Total Anggota Terdaftar: <span id="member-count-val" style="color: var(--gold);">0</span> Orang
+                </div>
+                <div class="welcome-msg">
+                    Halo! Selamat datang di website resmi marga <strong>NEXUS CREATOR COMMUNITY</strong>. 
+                    Disini adalah tempat kebutuhan atau peralatan marga Nexus, selamat menikmati fitur marga yahh!!!
+                </div>
+                <div class="section">
+                    <h2>Akun Official</h2>
+                    <a href="https://www.tiktok.com/@nexus.fams?_r=1&_t=ZS-957WhKlzLlJ" target="_blank" class="btn-action" onclick="addHistory('Membuka TikTok Nexus')">Buka TikTok</a>
+                </div>
+                <div class="comment-section">
+                    <h3 style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 1px; font-weight:600;">DISKUSI MARGA</h3>
+                    <div class="comment-box">
+                        <span class="user-tag">PitNewbie' <span class="rank-tag owner-rank">OWNER 👑</span></span>
+                        <span class="comment-text">baguss ga web nya? siapa dlu yang buat, gw sering dibully sama member tpi masi sayang ma kalian 😑🗿</span>
+                        <div class="like-bar">❤️ <span id="like-count">142</span> Menyukai</div>
+                        <div class="reply">
+                            <span class="user-tag">akari <span class="rank-tag admin-rank">#ADMIN</span></span>
+                            <span class="comment-text">tuhhh dengerin kata owner kasian dia, iya ga biawak?🗿</span>
+                        </div>
                     <div class="reply">
                         <span class="user-tag">PitNewbie' <span class="rank-tag owner-rank">OWNER 👑</span></span>
                         <span class="comment-text">maksud lu apaan? yang biawak siapa🤬🤬</span>
@@ -362,42 +359,157 @@
                     </div>
                 </div>
                 <div class="lock-notice">🔒 FITUR KOMENTAR DIKUNCI OLEH OWNER</div>
+                </div>
+            </div>
+
+            <!-- HALAMAN 2: PERLENGKAPAN MARGA -->
+            <div id="page-perlengkapan" class="app-page">
+                <header style="margin-bottom: 20px;">
+                    <h1 style="font-size: 2rem;">PERLENGKAPAN</h1>
+                </header>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 25px;">Unduh semua resource standard editor komunitas Nexus Creator disini.</p>
+                <div class="section">
+                    <h2>Intro Marga</h2>
+                    <button class="border-glass btn-action" onclick="openIntro()">Ambil Preset</button>
+                </div>
+                <div class="section">
+                    <h2>Font Marga</h2>
+                    <a href="https://drive.google.com/file/d/15H4OU7ekGCFf7_3x-OESgEgzXhKwSj6g/view?usp=drivesdk" target="_blank" class="btn-action" onclick="addHistory('Download Font')">Download</a>
+                </div>
+                <div class="section">
+                    <h2>CC Marga</h2>
+                    <a href="LINK_ALIGHT_MOTION_CC" target="_blank" class="btn-action" onclick="addHistory('Ambil CC')">Ambil CC</a>
+                </div>
+                <div class="section">
+                    <h2>WM Marga</h2>
+                    <a href="https://alightcreative.com/am/share/u/enaKvG2WCMh1gH3i3MQEDc0sKKd2/p/WKrQlSgPJF-62da42c0b9010256" target="_blank" class="btn-action" onclick="addHistory('Download WM')">Ambil WM</a>
+                </div>
+            </div>
+
+            <!-- HALAMAN 3: LIST ANGGOTA -->
+            <div id="page-anggota" class="app-page">
+                <header style="margin-bottom: 20px;">
+                    <h1 style="font-size: 2rem;">LIST ANGGOTA</h1>
+                </header>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Direktori seluruh kreator terdaftar Nexus.</p>
+                <div class="member-list-container" id="container-list-anggota">
+                    <!-- Data looping via firebase javascript -->
+                </div>
             </div>
         </div>
+
+        <!-- BOTTOM NAVIGATION BAR -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('utama', this)">
+                <span class="icon">🏠</span>
+                <span>Utama</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('perlengkapan', this)">
+                <span class="icon">🎒</span>
+                <span>Perlengkapan</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('anggota', this)">
+                <span class="icon">👥</span>
+                <span>Anggota</span>
+            </div>
+        </nav>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <!-- PEMANGGILAN FIREBASE SDK V8 ASLI -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
     <script>
-        // --- FIREBASE CONFIG ---
+        // --- KONFIGURASI INTEGRASI FIREBASE BARU MILIK ABANG ---
         const firebaseConfig = {
-            apiKey: "AIzaSy...",
-            authDomain: "proyek-abang.firebaseapp.com",
-            databaseURL: "https://proyek-abang-default-rtdb.firebaseio.com",
-            projectId: "proyek-abang",
-            storageBucket: "proyek-abang.appspot.com",
-            messagingSenderId: "...",
-            appId: "..."
+            apiKey: "AIzaSyB6NJuwQTGvmqtEQrHCT6hfkNMiYlf8o58",
+            authDomain: "nexus-fams.firebaseapp.com",
+            databaseURL: "https://nexus-fams-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "nexus-fams",
+            storageBucket: "nexus-fams.firebasestorage.app",
+            messagingSenderId: "569006724541",
+            appId: "1:569006724541:web:78329fa2236c1452386ed4"
         };
 
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.database();
 
+        // Ambil Data Marquee Secara Live dari Firebase
         db.ref("nexus/announcement").on("value", (snapshot) => {
             const data = snapshot.val();
             document.getElementById("live-info").innerText = data ? data.text : "WELCOME TO NEXUS CREATOR COMMUNITY!";
         });
 
+        // Event listener Realtime data Anggota Khusus Validasi Login & Daftar Akun Saja
+        function listenToMembersRealtime() {
+            db.ref("nexus/users").on("value", (snapshot) => {
+                const usersContainer = document.getElementById("container-list-anggota");
+                usersContainer.innerHTML = "";
+                
+                if(!snapshot.exists()) {
+                    usersContainer.innerHTML = `<div style="text-align:center; font-size:0.8rem; color:var(--text-muted)">Belum ada anggota mendaftar.</div>`;
+                    document.getElementById("member-count-val").innerText = "0";
+                    return;
+                }
+
+                let totalCount = 0;
+                const currentLoggedRank = localStorage.getItem("nexus_rank");
+
+                snapshot.forEach((childSnapshot) => {
+                    totalCount++;
+                    const userNode = childSnapshot.val();
+                    const cleanId = childSnapshot.key;
+
+                    let badgeColor = "#00d2ff";
+                    if(userNode.rank.includes("OWNER")) badgeColor = "var(--gold)";
+                    else if(userNode.rank.includes("ADMIN")) badgeColor = "#ff4d4d";
+
+                    // Logika tombol kick khusus Admin / Owner
+                    let kickButtonHtml = "";
+                    if (currentLoggedRank === "OWNER 👑" || currentLoggedRank === "#ADMIN") {
+                        if(userNode.name !== localStorage.getItem("nexus_nama")) {
+                            kickButtonHtml = `<button class="btn-kick" onclick="kickMember('${cleanId}')">Kick</button>`;
+                        }
+                    }
+
+                    const elementStr = `
+                        <div class="member-item">
+                            <div class="member-info">
+                                <img class="member-pfp" src="${userNode.pfp || 'https://via.placeholder.com/100'}" alt="pfp">
+                                <div>
+                                    <span class="member-name">${userNode.name}</span>
+                                    <span style="font-size:0.65rem; color:${badgeColor}; font-weight:700;">${userNode.rank}</span>
+                                </div>
+                            </div>
+                            ${kickButtonHtml}
+                        </div>
+                    `;
+                    usersContainer.innerHTML += elementStr;
+                });
+
+                document.getElementById("member-count-val").innerText = totalCount;
+            });
+        }
+
         let historyData = JSON.parse(localStorage.getItem("nexus_history")) || [];
         let cropper;
-        let finalPfpData = "https://via.placeholder.com/100";
+        let finalPfpData = ""; 
 
         window.onload = function() {
             updateLikes();
             startOpeningLoader();
         };
+
+        // Tab Switcher SPA Logic (Disimpan di Lokal, Tidak Masuk Firebase)
+        function switchTab(pageId, element) {
+            document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            
+            document.getElementById('page-' + pageId).classList.add('active');
+            element.classList.add('active');
+            addHistory(`Membuka tab ${pageId}`);
+        }
 
         function startOpeningLoader() {
             const barFill = document.getElementById('load-bar');
@@ -416,15 +528,10 @@
                 barFill.style.width = percentage + "%";
                 pctText.innerText = percentage + "%";
 
-                if (percentage < 30) {
-                    statusText.innerText = "loading....";
-                } else if (percentage >= 30 && percentage < 65) {
-                    statusText.innerText = "menganalisis data login...";
-                } else if (percentage >= 65 && percentage < 90) {
-                    statusText.innerText = "menyiapkan persiapan...";
-                } else {
-                    statusText.innerText = "loadingg.......";
-                }
+                if (percentage < 30) statusText.innerText = "loading....";
+                else if (percentage >= 30 && percentage < 65) statusText.innerText = "menganalisis data login...";
+                else if (percentage >= 65 && percentage < 90) statusText.innerText = "menyiapkan persiapan...";
+                else statusText.innerText = "loadingg.......";
 
                 if (elapsed >= duration) {
                     clearInterval(loadInterval);
@@ -439,7 +546,6 @@
             }, intervalTime);
         }
 
-        // --- LOADING KEDUA (PISAH DATA LOGIN) DENGAN BACKGROUND BINTANG ---
         function startDataProcessingLoader() {
             document.getElementById('login-overlay').style.display = "none";
             const targetLoading = document.getElementById('data-processing-loading');
@@ -449,19 +555,15 @@
             const dataStatus = document.getElementById('data-status');
 
             let elapsed = 0;
-            let duration = 3500; // Loading bintang berjalan selama 3.5 detik
+            let duration = 3500;
             let interval = setInterval(() => {
                 elapsed += 100;
                 let pct = Math.floor((elapsed / duration) * 100);
                 dataBar.style.width = pct + "%";
 
-                if (pct < 40) {
-                    dataStatus.innerText = "sinkronisasi id marga...";
-                } else if (pct >= 40 && pct < 80) {
-                    dataStatus.innerText = "memuat enkripsi pangkat...";
-                } else {
-                    dataStatus.innerText = "membuka gerbang nexus...";
-                }
+                if (pct < 40) dataStatus.innerText = "sinkronisasi id marga...";
+                else if (pct >= 40 && pct < 80) dataStatus.innerText = "memuat enkripsi pangkat...";
+                else dataStatus.innerText = "membuka gerbang nexus...";
 
                 if (elapsed >= duration) {
                     clearInterval(interval);
@@ -497,7 +599,7 @@
         }
         function rotateCrop() { cropper.rotate(90); }
         function applyCrop() {
-            finalPfpData = cropper.getCroppedCanvas({ width: 400, height: 400 }).toDataURL();
+            finalPfpData = cropper.getCroppedCanvas({ width: 200, height: 200 }).toDataURL("image/jpeg", 0.7); 
             document.getElementById('pfp-label').innerText = 'FOTO TERPILIH ✓';
             document.getElementById('crop-overlay').style.display = 'none';
         }
@@ -506,26 +608,74 @@
             document.getElementById('input-pfp').value = "";
         }
 
-        // --- AUTH SYSTEM ---
+        // --- MANAJEMEN SISTEM AUTH DATABASE (LOGIN / REGISTRASI KHUSUS) ---
         function checkLogin() {
-            const nama = document.getElementById('input-nama').value;
-            const kode = document.getElementById('input-kode').value;
-            if (nama === "") return alert("Isi nama!");
+            const namaInput = document.getElementById('input-nama').value.trim();
+            const kode = document.getElementById('input-kode').value.trim();
+            
+            if (namaInput === "") return alert("Isi nama anda!");
+            if (kode === "") return alert("Isi kode pangkat!");
+
+            const cleanId = namaInput.replace(/[.#$\[\]]/g, ""); 
 
             let rank, color, quote;
             if (kode === "12566789") { rank = "OWNER 👑"; color = "#FFD700"; quote = "Gokil! Semangat mimpin Nexus, Boss!"; }
             else if (kode === "557235") { rank = "#ADMIN"; color = "#ff4d4d"; quote = "Tolong jaga ketertiban di grup ya!"; }
-            else if (kode === "7771890") { rank = "#MEMBER"; color = "#00d2ff"; quote = "Kalo jadi member jangan siderr, kasian owner dh buatin fitur marga buat kalian, hargai"; }
+            else if (kode === "7771890") { rank = "#MEMBER"; color = "#00d2ff"; quote = "Kalo jadi member jangan siderr, hargai owner pembuat fitur marga!"; }
             else { return alert("Kode Pangkat Salah!"); }
 
-            localStorage.setItem("nexus_nama", nama);
-            localStorage.setItem("nexus_rank", rank);
-            localStorage.setItem("nexus_pfp", finalPfpData);
-            localStorage.setItem("nexus_color", color);
-            localStorage.setItem("nexus_quote", quote);
-            
-            // Panggil loading bintang setelah data berhasil divalidasi
-            startDataProcessingLoader();
+            // Cek ke Firebase Realtime Database
+            db.ref("nexus/users/" + cleanId).once("value").then((snapshot) => {
+                if (snapshot.exists()) {
+                    // USER LAMA LOGIN: Tarik data dari DB, tidak nulis data baru (hemat kuota)
+                    const existingUser = snapshot.val();
+                    localStorage.setItem("nexus_nama", existingUser.name);
+                    localStorage.setItem("nexus_rank", existingUser.rank);
+                    localStorage.setItem("nexus_pfp", existingUser.pfp || "https://via.placeholder.com/100");
+                    localStorage.setItem("nexus_color", color);
+                    localStorage.setItem("nexus_quote", quote);
+                    
+                    startDataProcessingLoader();
+                } else {
+                    // USER BARU REGISTRASI: Kirim data akun ke Firebase
+                    if (finalPfpData === "") {
+                        return alert("Akun belum terdaftar di database! Pilih/Upload foto profil dulu untuk daftar akun baru.");
+                    }
+
+                    const newUserData = {
+                        name: namaInput,
+                        rank: rank,
+                        pfp: finalPfpData
+                    };
+
+                    db.ref("nexus/users/" + cleanId).set(newUserData)
+                        .then(() => {
+                            localStorage.setItem("nexus_nama", namaInput);
+                            localStorage.setItem("nexus_rank", rank);
+                            localStorage.setItem("nexus_pfp", finalPfpData);
+                            localStorage.setItem("nexus_color", color);
+                            localStorage.setItem("nexus_quote", quote);
+
+                            startDataProcessingLoader();
+                        })
+                        .catch((error) => {
+                            alert("Database Error: " + error.message);
+                        });
+                }
+            });
+        }
+
+        // --- FITUR KICK NYATA (Hanya Owner/Admin) ---
+        function kickMember(userId) {
+            if(confirm(`Apakah kamu yakin ingin mengeluarkan "${userId}" dari web Nexus Fams?`)) {
+                db.ref("nexus/users/" + userId).remove()
+                    .then(() => {
+                        alert(`Anggota dengan ID "${userId}" berhasil di-kick dari sistem.`);
+                    })
+                    .catch((err) => {
+                        alert("Gagal mengeksekusi perintah kick: " + err.message);
+                    });
+            }
         }
 
         function showMainContent() {
@@ -533,6 +683,8 @@
             document.getElementById('main-content').style.display = "block";
             document.getElementById('display-name').innerText = localStorage.getItem("nexus_nama");
             document.getElementById('pfp-small').src = localStorage.getItem("nexus_pfp");
+            
+            listenToMembersRealtime();
             updateHistoryUI();
         }
 
@@ -564,8 +716,10 @@
             const list = document.getElementById('history-list');
             if (list) list.innerHTML = historyData.length ? historyData.map(i => `<div>> ${i}</div>`).join("") : "No activity recorded.";
         }
+    
 
         function logout() { localStorage.clear(); location.reload(); }
     </script>
 </body>
 </html>
+       
