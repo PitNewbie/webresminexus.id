@@ -442,7 +442,25 @@
         });
 
         // Event listener Realtime data Anggota Khusus Validasi Login & Daftar Akun Saja
+                // Event listener Realtime data Anggota + Urutan Pangkat Otomatis (Owner & Admin di Atas)
         function listenToMembersRealtime() {
+            const loggedUser = localStorage.getItem("nexus_nama");
+            const cleanLoggedId = loggedUser ? loggedUser.replace(/[.#$\[\]]/g, "") : null;
+
+            // Pengecekan realtime status akun sendiri
+            if (cleanLoggedId) {
+                db.ref("nexus/users/" + cleanLoggedId).on("value", (snapshot) => {
+                    if (!snapshot.exists()) {
+                        document.getElementById("main-content").style.display = "none";
+                        document.getElementById("profile-modal").style.display = "none";
+                        document.getElementById("login-overlay").style.display = "none";
+                        document.getElementById("blocked-overlay").style.display = "flex"; 
+                        localStorage.clear(); 
+                    }
+                });
+            }
+
+            // Memperbarui UI list anggota dengan Sorting Hirarki Pangkat
             db.ref("nexus/users").on("value", (snapshot) => {
                 const usersContainer = document.getElementById("container-list-anggota");
                 usersContainer.innerHTML = "";
@@ -455,21 +473,53 @@
 
                 let totalCount = 0;
                 const currentLoggedRank = localStorage.getItem("nexus_rank");
+                
+                // Tampung semua data dari Firebase ke dalam satu Array dulu buat diurutkan
+                let memberArray = [];
 
                 snapshot.forEach((childSnapshot) => {
                     totalCount++;
-                    const userNode = childSnapshot.val();
-                    const cleanId = childSnapshot.key;
+                    memberArray.push({
+                        id: childSnapshot.key,
+                        data: childSnapshot.val()
+                    });
+                });
+
+                // === LOGIKA URUTAN PREMIUM (SORTING METHOD) ===
+                memberArray.sort((a, b) => {
+                    // Berikan nilai bobot pada masing-masing pangkat
+                    let bobotA = 3; // Default Member biasa
+                    let bobotB = 3;
+
+                    if (a.data.rank.includes("OWNER")) bobotA = 1;      // Paling tinggi
+                    else if (a.data.rank.includes("ADMIN")) bobotA = 2; // Menengah
+
+                    if (b.data.rank.includes("OWNER")) bobotB = 1;
+                    else if (b.data.rank.includes("ADMIN")) bobotB = 2;
+
+                    return bobotA - bobotB; // Urutkan dari angka terkecil (1 ke 3)
+                });
+
+                // Setelah rapi terurut, baru kita tampilkan ke HTML menggunakan looping array
+                memberArray.forEach((member) => {
+                    const userNode = member.data;
+                    const cleanId = member.id;
 
                     let badgeColor = "#00d2ff";
                     if(userNode.rank.includes("OWNER")) badgeColor = "var(--gold)";
                     else if(userNode.rank.includes("ADMIN")) badgeColor = "#ff4d4d";
 
-                    // Logika tombol kick khusus Admin / Owner
                     let kickButtonHtml = "";
-                    if (currentLoggedRank === "OWNER 👑" || currentLoggedRank === "#ADMIN") {
-                        if(userNode.name !== localStorage.getItem("nexus_nama")) {
-                            kickButtonHtml = `<button class="btn-kick" onclick="kickMember('${cleanId}')">Kick</button>`;
+                    if (userNode.name !== localStorage.getItem("nexus_nama")) {
+                        if (currentLoggedRank === "OWNER 👑") {
+                            if (!userNode.rank.includes("OWNER")) {
+                                kickButtonHtml = `<button class="btn-kick" onclick="kickMember('${cleanId}')">Kick</button>`;
+                            }
+                        }
+                        else if (currentLoggedRank === "#ADMIN") {
+                            if (!userNode.rank.includes("OWNER") && !userNode.rank.includes("ADMIN")) {
+                                kickButtonHtml = `<button class="btn-kick" onclick="kickMember('${cleanId}')">Kick</button>`;
+                            }
                         }
                     }
 
@@ -491,7 +541,7 @@
                 document.getElementById("member-count-val").innerText = totalCount;
             });
         }
-
+        
         let historyData = JSON.parse(localStorage.getItem("nexus_history")) || [];
         let cropper;
         let finalPfpData = ""; 
