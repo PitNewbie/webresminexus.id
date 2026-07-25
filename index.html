@@ -728,6 +728,80 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+
+        .official-accounts {
+    margin-bottom: 25px;
+}
+
+.official-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.official-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.official-btn {
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border-light);
+    border-radius: 16px;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.official-btn i {
+    font-size: 22px;
+    transition: transform 0.3s ease;
+}
+
+.official-btn span {
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Hover & Active Effects */
+.official-btn:active {
+    transform: scale(0.95);
+}
+
+.official-btn.tiktok:hover, .official-btn.tiktok:active {
+    border-color: rgba(254, 44, 85, 0.5);
+    box-shadow: 0 4px 20px rgba(254, 44, 85, 0.2);
+}
+.official-btn.tiktok i { color: #fe2c55; }
+
+.official-btn.discord:hover, .official-btn.discord:active {
+    border-color: rgba(88, 101, 242, 0.5);
+    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.2);
+}
+.official-btn.discord i { color: #5865f2; }
+
+.official-btn.whatsapp:hover, .official-btn.whatsapp:active {
+    border-color: rgba(37, 211, 102, 0.5);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+}
+.official-btn.whatsapp i { color: #25d366; }
+
         
         <script type="application/ld+json">
   {
@@ -756,6 +830,32 @@
         <div class="welcome-card">
             <i class="fa-solid fa-crown" style="color: var(--accent-gold); font-size: 20px;"></i>
             <p>Halo! Selamat datang di website resmi marga <b>NEXUS CREATOR COMMUNITY</b>. Disini adalah tempat kebutuhan atau peralatan marga Nexus, selamat menikmati fitur marga yahh!!!</p>
+        </div>
+
+        <div class="official-accounts">
+            <div class="official-title">
+                <i class="fa-solid fa-circle-check" style="color: var(--accent-gold);"></i>
+                <span>Akun Official Marga</span>
+            </div>
+            <div class="official-grid">
+                <!-- TikTok -->
+                <a href="https://tiktok.com/@nexusfams1103" target="_blank" class="official-btn tiktok">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+
+                <!-- Discord -->
+                <a href="https://discord.gg/ydhrCHK8A" target="_blank" class="official-btn discord">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+
+                <!-- Saluran WhatsApp -->
+                <a href="https://whatsapp.com/channel/0029Vb8WUbxE50UjmpWeXb2D" target="_blank" class="official-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Saluran WA</span>
+                </a>
+            </div>
         </div>
 
         <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Papan Informasi Marga</h2>
