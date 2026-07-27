@@ -858,18 +858,10 @@
             </div>
         </div>
 
-        <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Papan Informasi Marga</h2>
+                <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Papan Informasi Marga</h2>
         
-        <div class="feed-card">
-            <div class="feed-image">
-                <div class="feed-badge">Pengumuman</div>
-                <i class="fa-solid fa-server"></i>
-            </div>
-            <div class="feed-content">
-                <div class="feed-date">Sabtu, 25 Juli 2026</div>
-                <h3 class="feed-title">Database Error & Pemeliharaan System</h3>
-                <p class="feed-desc">Website saat ini bersifat sementara karena server utama sedang dalam perbaikan. Semua data akun tersimpan secara lokal di perangkat kalian.</p>
-            </div>
+        <!-- Kontainer Berita/Feed (Akan diisi otomatis oleh JS) -->
+        <div id="papanInformasiContainer"></div>
         </div>
     </div>
 
@@ -1215,6 +1207,63 @@
             }
             checkURLPreview();
         });
+
+
+        // 1. Data Array Papan Informasi (Tinggal tambah/edit di sini)
+const daftarInformasi = [
+    {  
+        title: "Pengumuman Penting Buat Anggota Marga",  
+        badge: "Penting",  
+        desc: "buat para my anggota, jangan sekali² sebarin kode pangkat ke luar marga, klo ad yng ketahuan nyebar bakal gw blacklist🤬<br>alasannya knapa min? tanya biawak",  
+        date: "Senin, 27 Juli 2026",  
+        iconClass: "fa-solid fa-bullhorn"  
+    },
+    {  
+        title: "Database Error & Pemeliharaan System",  
+        badge: "Pengumuman",  
+        desc: "Website saat ini bersifat sementara karena server utama sedang dalam perbaikan. Semua data akun tersimpan secara lokal di perangkat kalian.",  
+        date: "Sabtu, 25 Juli 2026",  
+        iconClass: "fa-solid fa-server"  
+    }
+];
+
+// 2. Fungsi untuk Menampilkan Data ke HTML
+function renderPapanInformasi() {
+    const container = document.getElementById('papanInformasiContainer');
+    if (!container) return;
+
+    let htmlContent = '';
+
+    daftarInformasi.forEach(item => {
+        htmlContent += `
+            <div class="feed-card">
+                <div class="feed-image">
+                    <div class="feed-badge">${item.badge}</div>
+                    <i class="${item.iconClass}"></i>
+                </div>
+                <div class="feed-content">
+                    <div class="feed-date">${item.date}</div>
+                    <h3 class="feed-title">${item.title}</h3>
+                    <p class="feed-desc">${item.desc}</p>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = htmlContent;
+}
+
+// 3. Panggil Fungsi saat Halaman Dimuat
+window.addEventListener('DOMContentLoaded', () => {
+    renderPapanInformasi(); // <--- Tambahkan panggilan ini
+    
+    const isLogin = localStorage.getItem('nexus_logged');
+    if (isLogin === 'true') {
+        document.getElementById('loginOverlay').classList.add('hide');
+        loadUserProfile();
+    }
+    checkURLPreview();
+});
 
         // Bagikan Profil Ke Clipboard / Native Share
         function shareMyProfile() {
