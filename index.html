@@ -730,88 +730,115 @@
 
 
         .official-accounts {
-    margin-bottom: 25px;
-}
+            margin-bottom: 25px;
+        }
 
-.official-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .official-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.official-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
+        .official-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
 
-.official-btn {
-    background: rgba(20, 20, 25, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border-light);
-    border-radius: 16px;
-    padding: 14px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
+        .official-btn {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border-light);
+            border-radius: 16px;
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
-.official-btn i {
-    font-size: 22px;
-    transition: transform 0.3s ease;
-}
+        .official-btn i {
+            font-size: 22px;
+            transition: transform 0.3s ease;
+        }
 
-.official-btn span {
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-    white-space: nowrap;
-}
+        .official-btn span {
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            white-space: nowrap;
+        }
 
-/* Hover & Active Effects */
-.official-btn:active {
-    transform: scale(0.95);
-}
+        /* Hover & Active Effects */
+        .official-btn:active {
+            transform: scale(0.95);
+        }
 
-.official-btn.tiktok:hover, .official-btn.tiktok:active {
-    border-color: rgba(254, 44, 85, 0.5);
-    box-shadow: 0 4px 20px rgba(254, 44, 85, 0.2);
-}
-.official-btn.tiktok i { color: #fe2c55; }
+        .official-btn.tiktok:hover, .official-btn.tiktok:active {
+            border-color: rgba(254, 44, 85, 0.5);
+            box-shadow: 0 4px 20px rgba(254, 44, 85, 0.2);
+        }
+        .official-btn.tiktok i { color: #fe2c55; }
 
-.official-btn.discord:hover, .official-btn.discord:active {
-    border-color: rgba(88, 101, 242, 0.5);
-    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.2);
-}
-.official-btn.discord i { color: #5865f2; }
+        .official-btn.discord:hover, .official-btn.discord:active {
+            border-color: rgba(88, 101, 242, 0.5);
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.2);
+        }
+        .official-btn.discord i { color: #5865f2; }
 
-.official-btn.whatsapp:hover, .official-btn.whatsapp:active {
-    border-color: rgba(37, 211, 102, 0.5);
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
-}
-.official-btn.whatsapp i { color: #25d366; }
+        .official-btn.whatsapp:hover, .official-btn.whatsapp:active {
+            border-color: rgba(37, 211, 102, 0.5);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+        }
+        .official-btn.whatsapp i { color: #25d366; }
 
+        /* TOMBOL PILIHAN VERSI DALAM MODAL */
+        .btn-version-option {
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid var(--glass-border-light);
+            padding: 14px 16px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-version-option:hover, .btn-version-option:active {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .btn-version-option i {
+            color: var(--accent-gold);
+        }
         
-        <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "NexusFams",
-    "url": "https://webnexusfamsofc.starpit.my.id/",
-    "logo": "https://webnexusfamsofc.starpit.my.id/logo-nexus.jpg"
-            }
     </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NexusFams",
+        "url": "https://webnexusfamsofc.starpit.my.id/",
+        "logo": "https://webnexusfamsofc.starpit.my.id/logo-nexus.jpg"
+    }
+    </script>
 </head>
 <body>
 
@@ -858,11 +885,10 @@
             </div>
         </div>
 
-                <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Papan Informasi Marga</h2>
+        <h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Papan Informasi Marga</h2>
         
         <!-- Kontainer Berita/Feed (Akan diisi otomatis oleh JS) -->
         <div id="papanInformasiContainer"></div>
-        </div>
     </div>
 
     <!-- ================= HALAMAN 2: PERALATAN & CHAT GIMIK ================= -->
@@ -870,16 +896,16 @@
         <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> Peralatan Marga</h2>
         
         <div class="tools-grid">
-            <a href="https://alightmotion.app" target="_blank" class="tool-card">
+            <div class="tool-card" style="cursor: pointer;" onclick="openOptionsModal('intro')">
                 <i class="fa-solid fa-clapperboard"></i>
                 <span>Intro Marga</span>
                 <small>Alight Motion</small>
-            </a>
-            <a href="https://alightcreative.com/am/share/u/enakvg2wcmh1gh3i3mqedc0skkd2/p/wkrqlsgpjf-62da42c0b9010256" target="_blank" class="tool-card">
+            </div>
+            <div class="tool-card" style="cursor: pointer;" onclick="openOptionsModal('wm')">
                 <i class="fa-solid fa-square-share-nodes"></i>
                 <span>WM Marga</span>
                 <small>Alight Motion</small>
-            </a>
+            </div>
             <a href="https://drive.google.com/file/d/15H4OU7ekGCFf7_3x-OESgEgzXhKwSj6g/view?usp=drivesdk" target="_blank" class="tool-card">
                 <i class="fa-solid fa-font"></i>
                 <span>Font Marga</span>
@@ -976,6 +1002,7 @@
                 </div>
             </div>
 
+            
             <div class="comment-box">
                 <div class="comment-header">
                     <div class="comment-info">
@@ -1133,7 +1160,7 @@
             <div style="font-size: 11px; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
                 <i class="fa-solid fa-id-card"></i> Preview Profil Anggota
             </div>
-            <div class="sheet-avatar-wrapper" style="width:75px; height:75px;">
+              <div class="sheet-avatar-wrapper" style="width:75px; height:75px;">
                 <img id="prevAvatar" src="" class="sheet-avatar" alt="Avatar">
             </div>
             <h3 id="prevName" style="font-size: 18px; color: #fff; margin-bottom: 2px;">Name</h3>
@@ -1141,6 +1168,21 @@
             <p id="prevBio" style="font-size: 12px; color: #d1d5db; font-style: italic; margin-bottom: 15px;">Bio</p>
             
             <button class="btn-auth-submit" style="margin-top:0;" onclick="closePreviewModal()">Masuk Ke Web Nexus</button>
+        </div>
+    </div>
+
+    <!-- ================= MODAL PILIHAN PERALATAN ================= -->
+    <div id="optionsOverlay" class="preview-overlay">
+        <div class="preview-card">
+            <button class="preview-close-btn" onclick="closeOptionsModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div style="font-size: 11px; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
+                <i class="fa-solid fa-layer-group"></i> Pilih Versi
+            </div>
+            <h3 id="optionsTitle" style="font-size: 18px; color: #fff; margin-bottom: 15px;">Nama Peralatan</h3>
+            
+            <div id="optionsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                <!-- Tombol versi akan dirender lewat JS di sini -->
+            </div>
         </div>
     </div>
 
@@ -1210,60 +1252,60 @@
 
 
         // 1. Data Array Papan Informasi (Tinggal tambah/edit di sini)
-const daftarInformasi = [
-    {  
-        title: "Pengumuman Penting Buat Anggota Marga",  
-        badge: "Penting",  
-        desc: "buat para my anggota, jangan sekali² sebarin kode pangkat ke luar marga, klo ad yng ketahuan nyebar bakal gw blacklist🤬<br>alasannya knapa min? tanya biawak",  
-        date: "Senin, 27 Juli 2026",  
-        iconClass: "fa-solid fa-bullhorn"  
-    },
-    {  
-        title: "Database Error & Pemeliharaan System",  
-        badge: "Pengumuman",  
-        desc: "Website saat ini bersifat sementara karena server utama sedang dalam perbaikan. Semua data akun tersimpan secara lokal di perangkat kalian.",  
-        date: "Sabtu, 25 Juli 2026",  
-        iconClass: "fa-solid fa-server"  
-    }
-];
+        const daftarInformasi = [
+            {  
+                title: "Pengumuman Penting Buat Anggota Marga",  
+                badge: "Penting",  
+                desc: "buat para my anggota, jangan sekali² sebarin kode pangkat ke luar marga, klo ad yng ketahuan nyebar bakal gw blacklist🤬<br>alasannya knapa min? tanya biawak",  
+                date: "Senin, 27 Juli 2026",  
+                iconClass: "fa-solid fa-bullhorn"  
+            },
+            {  
+                title: "Database Error & Pemeliharaan System",  
+                badge: "Pengumuman",  
+                desc: "Website saat ini bersifat sementara karena server utama sedang dalam perbaikan. Semua data akun tersimpan secara lokal di perangkat kalian.",  
+                date: "Sabtu, 25 Juli 2026",  
+                iconClass: "fa-solid fa-server"  
+            }
+        ];
 
-// 2. Fungsi untuk Menampilkan Data ke HTML
-function renderPapanInformasi() {
-    const container = document.getElementById('papanInformasiContainer');
-    if (!container) return;
+        // 2. Fungsi untuk Menampilkan Data ke HTML
+        function renderPapanInformasi() {
+            const container = document.getElementById('papanInformasiContainer');
+            if (!container) return;
 
-    let htmlContent = '';
+            let htmlContent = '';
 
-    daftarInformasi.forEach(item => {
-        htmlContent += `
-            <div class="feed-card">
-                <div class="feed-image">
-                    <div class="feed-badge">${item.badge}</div>
-                    <i class="${item.iconClass}"></i>
-                </div>
-                <div class="feed-content">
-                    <div class="feed-date">${item.date}</div>
-                    <h3 class="feed-title">${item.title}</h3>
-                    <p class="feed-desc">${item.desc}</p>
-                </div>
-            </div>
-        `;
-    });
+            daftarInformasi.forEach(item => {
+                htmlContent += `
+                    <div class="feed-card">
+                        <div class="feed-image">
+                            <div class="feed-badge">${item.badge}</div>
+                            <i class="${item.iconClass}"></i>
+                        </div>
+                        <div class="feed-content">
+                            <div class="feed-date">${item.date}</div>
+                            <h3 class="feed-title">${item.title}</h3>
+                            <p class="feed-desc">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
 
-    container.innerHTML = htmlContent;
-}
+            container.innerHTML = htmlContent;
+        }
 
-// 3. Panggil Fungsi saat Halaman Dimuat
-window.addEventListener('DOMContentLoaded', () => {
-    renderPapanInformasi(); // <--- Tambahkan panggilan ini
-    
-    const isLogin = localStorage.getItem('nexus_logged');
-    if (isLogin === 'true') {
-        document.getElementById('loginOverlay').classList.add('hide');
-        loadUserProfile();
-    }
-    checkURLPreview();
-});
+        // 3. Panggil Fungsi saat Halaman Dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPapanInformasi(); // <--- Tambahkan panggilan ini
+            
+            const isLogin = localStorage.getItem('nexus_logged');
+            if (isLogin === 'true') {
+                document.getElementById('loginOverlay').classList.add('hide');
+                loadUserProfile();
+            }
+            checkURLPreview();
+        });
 
         // Bagikan Profil Ke Clipboard / Native Share
         function shareMyProfile() {
@@ -1360,7 +1402,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 alert('Kode pangkat salah atau tidak terdaftar!');
                 return;
             }
-
+            
             const processSave = (avatarDataUrl) => {
                 localStorage.setItem('nexus_logged', 'true');
                 localStorage.setItem('nexus_name', name);
@@ -1479,6 +1521,52 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+          // --- DATA LINK PERALATAN ---
+        const toolLinksData = {
+            wm: {
+                title: "Pilih WM Marga",
+                options: [
+                    { name: "WM Marga V1 (Original)", link: "https://alightcreative.com/am/share/u/enakvg2wcmh1gh3i3mqedc0skkd2/p/wkrqlsgpjf-62da42c0b9010256" },
+                    { name: "WM Marga V2", link: "#" },
+                    { name: "WM Marga V3", link: "#" }
+                ]
+            },
+            intro: {
+                title: "Pilih Intro Marga",
+                options: [
+                    { name: "Intro V1", link: "https://alightmotion.app" },
+                    { name: "Intro V2", link: "#" }
+                ]
+            }
+        };
+
+        // --- FUNGSI BUKA MODAL ---
+        function openOptionsModal(toolKey) {
+            const data = toolLinksData[toolKey];
+            if (!data) return;
+
+            document.getElementById('optionsTitle').innerText = data.title;
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = ''; 
+
+            data.options.forEach(opt => {
+                const btn = document.createElement('a');
+                btn.href = opt.link;
+                btn.target = "_blank"; 
+                btn.className = "btn-version-option";
+                btn.innerHTML = `<span>${opt.name}</span> <i class="fa-solid fa-arrow-right"></i>`;
+                container.appendChild(btn);
+            });
+
+            document.getElementById('optionsOverlay').classList.add('show');
+        }
+
+        // --- FUNGSI TUTUP MODAL ---
+        function closeOptionsModal() {
+            document.getElementById('optionsOverlay').classList.remove('show');
         }
     </script>
 </body>
