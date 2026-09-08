@@ -1160,16 +1160,27 @@
             <div style="font-size: 11px; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
                 <i class="fa-solid fa-id-card"></i> Preview Profil Anggota
             </div>
-              <div class="sheet-avatar-wrapper" style="width:75px; height:75px;">
-                <img id="prevAvatar" src="" class="sheet-avatar" alt="Avatar">
+            <div class="sheet-avatar-wrapper" style="width:75px; height:75px;">
+                <img id="prevAvatar" src="logo-nexus.jpg" class="sheet-avatar" alt="Avatar">
             </div>
             <h3 id="prevName" style="font-size: 18px; color: #fff; margin-bottom: 2px;">Name</h3>
+            
+            <!-- Tambahan Tag ID -->
+            <span id="prevTagId" class="user-tag-text" style="font-size: 11px; margin-bottom: 8px;">Tag ID: #000000</span>
+            
             <span id="prevPangkat" class="role-tag" style="display:inline-block; margin-bottom: 8px;">Pangkat</span>
             <p id="prevBio" style="font-size: 12px; color: #d1d5db; font-style: italic; margin-bottom: 15px;">Bio</p>
+            
+            <!-- Tambahan Sosial Media -->
+            <div class="profile-socials" style="margin-bottom: 20px;">
+                <a id="prevTiktok" href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a id="prevYoutube" href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
             
             <button class="btn-auth-submit" style="margin-top:0;" onclick="closePreviewModal()">Masuk Ke Web Nexus</button>
         </div>
     </div>
+    
 
     <!-- ================= MODAL PILIHAN PERALATAN ================= -->
     <div id="optionsOverlay" class="preview-overlay">
@@ -1307,20 +1318,30 @@
             checkURLPreview();
         });
 
-        // Bagikan Profil Ke Clipboard / Native Share
         function shareMyProfile() {
-            const name = localStorage.getItem('nexus_name') || 'Member';
-            const pangkat = localStorage.getItem('nexus_pangkat') || 'MEMBER';
-            const bio = localStorage.getItem('nexus_bio') || '';
+            // Ambil semua data profil
+            const shareData = {
+                name: localStorage.getItem('nexus_name') || 'Member',
+                pangkat: localStorage.getItem('nexus_pangkat') || 'MEMBER',
+                bio: localStorage.getItem('nexus_bio') || '',
+                tagid: localStorage.getItem('nexus_tagid') || 'NX-000000',
+                tiktok: localStorage.getItem('nexus_tiktok') || '#',
+                youtube: localStorage.getItem('nexus_youtube') || '#'
+                // Catatan: Foto profil sengaja tidak dimasukkan ke dalam link karena
+                // file gambar dari galeri akan membuat teks Base64 menjadi ratusan ribu karakter (URL Error).
+            };
 
-            // Format Link Khusus untuk dibuka
+            // Convert data ke JSON string lalu dienkripsi pakai Base64 (encodeURIComponent agar emoji tidak error)
+            const base64Data = btoa(encodeURIComponent(JSON.stringify(shareData)));
+            
+            // Format URL baru: domain.com/#/share/eyJ...
             const baseUrl = window.location.href.split('#')[0];
-            const shareUrl = `${baseUrl}#preview=true&name=${encodeURIComponent(name)}&pangkat=${encodeURIComponent(pangkat)}&bio=${encodeURIComponent(bio)}`;
+            const shareUrl = `${baseUrl}#/share/${base64Data}`;
 
             if (navigator.share) {
                 navigator.share({
-                    title: `Profil ${name} - Nexus Creator Community`,
-                    text: `Cek profil ${name} (${pangkat}) di Website Nexus Creator Community!`,
+                    title: `Profil ${shareData.name} - Nexus Creator Community`,
+                    text: `Cek profil ${shareData.name} (${shareData.pangkat}) di Website Nexus Creator Community!`,
                     url: shareUrl
                 }).catch(() => {
                     copyToClipboard(shareUrl);
@@ -1329,7 +1350,7 @@
                 copyToClipboard(shareUrl);
             }
         }
-
+        
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert(' Link profil berhasil disalin! Tinggal bagikan ke WhatsApp atau media sosial lainnya.');
@@ -1338,37 +1359,56 @@
             });
         }
 
-        // Memeriksa Apakah Ada Link Preview di URL saat web dibuka
         function checkURLPreview() {
             const hash = window.location.hash;
-            if (hash.includes('preview=true')) {
-                const params = new URLSearchParams(hash.replace('#', ''));
-                const name = params.get('name') || 'Anggota Nexus';
-                const pangkat = params.get('pangkat') || 'MEMBER';
-                const bio = params.get('bio') || 'Anggota resmi Nexus Creator Community.';
+            // Deteksi rute URL share
+            if (hash.startsWith('#/share/')) {
+                try {
+                    // Buang '#/share/' dan ambil kode Base64-nya
+                    const encryptedData = hash.replace('#/share/', '');
+                    
+                    // Decrypt Base64 kembali ke format JSON Object
+                    const decodedString = decodeURIComponent(atob(encryptedData));
+                    const data = JSON.parse(decodedString);
 
-                document.getElementById('prevName').innerText = name;
-                document.getElementById('prevBio').innerText = bio;
-                
-                const badge = document.getElementById('prevPangkat');
-                badge.innerText = pangkat;
-                
-                if (pangkat === 'OWNER') {
-                    badge.className = "role-tag owner";
-                } else if (pangkat === 'ADMIN') {
-                    badge.className = "role-tag admin";
-                } else {
-                    badge.className = "role-tag";
-                    badge.style.background = "rgba(52, 152, 219, 0.2)";
-                    badge.style.color = "#3498db";
+                    // Masukkan data lengkap ke dalam elemen Modal
+                    document.getElementById('prevName').innerText = data.name || 'Anggota Nexus';
+                    document.getElementById('prevBio').innerText = data.bio || 'Belum ada bio.';
+                    
+                    const prevTag = document.getElementById('prevTagId');
+                    if(prevTag) prevTag.innerText = `Tag ID: ${data.tagid || 'NX-000000'}`;
+                    
+                    const prevTiktok = document.getElementById('prevTiktok');
+                    if(prevTiktok) prevTiktok.href = data.tiktok || '#';
+
+                    const prevYoutube = document.getElementById('prevYoutube');
+                    if(prevYoutube) prevYoutube.href = data.youtube || '#';
+                    
+                    const badge = document.getElementById('prevPangkat');
+                    badge.innerText = data.pangkat || 'MEMBER';
+                    
+                    // Setting warna badge sesuai dengan pangkat
+                    if (data.pangkat === 'OWNER') {
+                        badge.className = "role-tag owner";
+                        badge.style = ""; 
+                    } else if (data.pangkat === 'ADMIN') {
+                        badge.className = "role-tag admin";
+                        badge.style = ""; 
+                    } else {
+                        badge.className = "role-tag";
+                        badge.style.background = "rgba(52, 152, 219, 0.2)";
+                        badge.style.color = "#3498db";
+                    }
+
+                    // Tampilkan Modal Preview Pop-up
+                    document.getElementById('previewOverlay').classList.add('show');
+                } catch (e) {
+                    alert('Tautan profil tidak valid atau rusak!');
+                    window.location.hash = ''; // Bersihkan URL yang rusak
                 }
-
-                document.getElementById('prevAvatar').src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150';
-                
-                // Tampilkan Modal Preview
-                document.getElementById('previewOverlay').classList.add('show');
             }
         }
+        
 
         function closePreviewModal() {
             document.getElementById('previewOverlay').classList.remove('show');
